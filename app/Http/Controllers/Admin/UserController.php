@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User as UserRequest;
 use App\Support\Cropper;
@@ -46,7 +47,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $clients = Client::orderBy('social_name')->get();
+        return view('admin.users.create',[
+            'clients' => $clients
+        ]);
     }
 
     /**
@@ -89,8 +93,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
+        $clients = Client::orderBy('alias_name')->get();
         return view('admin.users.edit', [
-            'user' => $user
+            'user' => $user,
+            'clients' => $clients,
         ]);
     }
 

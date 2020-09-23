@@ -38,7 +38,8 @@ class User extends Authenticatable
         'user',
         'master',
         'admin',
-        'client'
+        'client',
+        'client_id'
     ];
 
     /**
@@ -59,6 +60,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
 
     public function getUrlCoverAttribute()
     {

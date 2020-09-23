@@ -238,19 +238,45 @@
                                 </div>
 
                                 <div class="app_collapse_content">
-
+                                    <label class="label">
+                                        <span class="legend">Empresa:</span>
+                                        <select name="client_id" class="client_id">
+                                            <option value="" selected>Selecione a empresa</option>
+                                            @foreach($clients as $client)
+                                                <option
+                                                    value="{{ $client->id }}" {{ ($client->id == $user->client_id ? 'selected' : '') }}>{{ $client->social_name }}
+                                                    ({{ $client->alias_name }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <p style="margin-top: 4px;">
+                                            <a href="{{ route('admin.clients.edit', ['client' => $user->client_id]) }}"
+                                               class="text-orange icon-link" style="font-size: .8em;"
+                                               target="_blank">Acessar
+                                                Cadastro</a>
+                                        </p>
+                                    </label>
                                     <div class="companies_list">
-                                        <div class="no-content mb-2">Não foram encontrados registros!</div>
+                                        @if($user->client_id)
 
-                                        <div class="companies_list_item mb-2">
-                                            <p><b>Razão Social:</b> Visual Sul Informatica Ltda</p>
-                                            <p><b>Nome Fantasia:</b> Visua Sistemas de gestão</p>
-                                            <p><b>CNPJ:</b> 12.3456.789/0001-12 - <b>Inscrição Estadual:</b>1231423421
-                                            </p>
-                                            <p><b>Endereço:</b> Rua Aracaju, 368</p>
-                                            <p><b>CEP:</b> 89000-000 <b>Bairro:</b> Saguaçu <b>Cidade/Estado:</b>
-                                                Joinville/SC</p>
-                                        </div>
+                                            @foreach($user->client()->get() as $client)
+                                                <div class="companies_list_item mb-2">
+                                                    <p><b>Razão Social:</b> {{ $client->social_name }}</p>
+                                                    <p><b>Nome Fantasia:</b> {{ $client->alias_name }}</p>
+                                                    <p><b>CNPJ:</b> {{ $client->document_company }} -
+                                                        <b>Inscrição
+                                                            Estadual:</b> {{ $client->document_company_secondary }}
+                                                    </p>
+                                                    <p><b>Endereço:</b> {{ $client->street }}, {{ $user->number }}</p>
+                                                    <p><b>CEP:</b> {{ $client->zipcode }}
+                                                        <b>Bairro:</b> {{ $client->neighborhood }}
+                                                        <b>Cidade/Estado:</b>
+                                                        {{ $client->city }}/{{ $client->state }}</p>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="no-content mb-2">Não foram encontrados registros!</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

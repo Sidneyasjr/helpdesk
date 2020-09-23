@@ -26,6 +26,11 @@ class Client extends Model
     ];
 
 
+    public function users()
+    {
+        return $this->hasMany(User::class, 'client_id', 'id');
+    }
+
     public function setDocumentCompanyAttribute($value)
     {
         $this->attributes['document_company'] = (!empty($value) ? $this->clearField($value) : null);
