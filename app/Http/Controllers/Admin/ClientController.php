@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Client as ClientRequest;
 
 class ClientController extends Controller
 {
@@ -15,9 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $client = Client::all();
+        $clients = Client::all();
         return view('admin.clients.index', [
-            'client' => $client,
+            'clients' => $clients,
         ]);
     }
 
@@ -37,11 +38,11 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         $createClient = Client::create($request->all());
 
-        return redirect()->route('admin.clients.edit.edit', [
+        return redirect()->route('admin.clients.edit', [
             'client' => $createClient->id,
         ])->with(['color' => 'green', 'message' => 'Empresa cadastrada com sucesso!']);
     }
@@ -67,7 +68,7 @@ class ClientController extends Controller
     {
         $client = Client::where('id', $id)->first();
 
-        return view('admin.clients.create.edit', [
+        return view('admin.clients.edit', [
             'client' => $client
         ]);
     }
@@ -79,11 +80,16 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, $id)
     {
-        $client = Client::where('id', $id);
+        $client = Client::where('id', $id)->first();
         $client->fill($request->all());
-        $client->save();
+
+        $client->setStatusAttribute($request->status);
+
+        if(!$client->save()){
+            return redirect()->back()->withInput()->withErrors();
+        }
 
         return redirect()->route('admin.clients.edit', [
             'client' => $client->id,

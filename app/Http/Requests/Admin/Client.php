@@ -28,7 +28,6 @@ class Client extends FormRequest
             'social_name' => 'required|min:5|max:191',
             'alias_name' => 'required',
             'document_company' => 'required',
-            'document_company_secondary' => 'required',
 
             // Address
             'zipcode' => 'required|min:8|max:9',
@@ -39,7 +38,8 @@ class Client extends FormRequest
             'city' => 'required',
 
             'email' => 'required',
-            'telephone' => 'required'
+            'telephone' => 'required',
+
         ];
     }
 }

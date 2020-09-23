@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     protected $fillable = [
-        'user',
         'social_name',
         'alias_name',
         'document_company',
@@ -19,8 +18,13 @@ class Client extends Model
         'neighborhood',
         'state',
         'city',
+        'telephone',
+        'cell',
+        'email',
+        'email_secondary',
         'status'
     ];
+
 
     public function setDocumentCompanyAttribute($value)
     {
@@ -54,5 +58,10 @@ class Client extends Model
         }
 
         return str_replace(['.', '-', '/', '(', ')', ' '], '', $param);
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = ($value === true || $value === 'on' ? 1 : 0);
     }
 }

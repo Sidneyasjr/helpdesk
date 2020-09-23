@@ -184,7 +184,12 @@ return [
         'document' => 'Documento',
         'date_of_birth' => 'Data de Nascimento',
         'zipcode' => 'CEP',
-        'telephone' => 'Telefone'
+        'telephone' => 'Telefone',
+        'social_name' => 'Razão Social',
+        'alias_name' => 'Nome Fantasia',
+        'document_company' => 'CNPJ',
+        'document_company_secondary',
+
 
 
     ],
