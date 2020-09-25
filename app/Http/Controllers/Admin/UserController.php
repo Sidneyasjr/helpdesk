@@ -95,8 +95,9 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $clients = Client::orderBy('alias_name')->get();
         return view('admin.users.edit', [
-            'user' => $user,
             'clients' => $clients,
+            'user' => $user,
+
         ]);
     }
 

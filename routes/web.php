@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function (){
+Route::group(['namespace' => 'admin', 'as' => 'admin.'], function (){
 
     /** Formulario de Login */
     Route::get('/', 'AuthController@showLoginForm')->name('login');
