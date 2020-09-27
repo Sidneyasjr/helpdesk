@@ -43,10 +43,10 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item"><a class="icon-phone" href="">Chamados</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.calleds') }}"><a class="icon-phone" href="{{ route('admin.calleds.index') }}">Chamados</a>
                 <ul class="dash_sidebar_nav_submenu">
-                    <li class=""><a href="">Ver Todos</a></li>
-                    <li class=""><a href="">Criar Novo</a></li>
+                    <li class="{{ isActive('admin.calleds.index') }}"><a href="{{ route('admin.calleds.index') }}">Ver Todos</a></li>
+                    <li class="{{ isActive('admin.calleds.create') }}"><a href="{{ route('admin.calleds.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
             <li class="dash_sidebar_nav_item {{ isActive('admin.clients') }}"><a class="icon-users" href="{{ route('admin.clients.index') }}">Clientes</a>

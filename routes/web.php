@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'admin', 'as' => 'admin.'], function (){
+Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function (){
 
     /** Formulario de Login */
-    Route::get('/', 'AuthController@showLoginForm')->name('login');
+    Route::get('/', 'AuthController@showLoginForm')->name('home');
     Route::post('login', 'AuthController@login')->name('login.do');
 
     /** Rotas Protegidas */
@@ -31,6 +31,9 @@ Route::group(['namespace' => 'admin', 'as' => 'admin.'], function (){
 
         /** Clientes */
         Route::resource('clients', 'ClientController');
+
+        /** Chamados */
+        Route::resource('calleds', 'CalledController');
     });
 
 
