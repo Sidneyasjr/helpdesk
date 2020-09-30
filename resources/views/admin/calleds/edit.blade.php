@@ -5,7 +5,7 @@
     <section class="dash_content_app">
 
         <header class="dash_content_app_header">
-            <h2 class="icon-search">Cadastrar Novo Chamado</h2>
+            <h2 class="icon-search">Editar Chamado</h2>
 
             <div class="dash_content_app_header_actions">
                 <nav class="dash_content_app_breadcrumb">
@@ -34,6 +34,12 @@
                 @endforeach
             @endif
 
+            @if(session()->exists('message'))
+                <div class="message message-green">
+                    <p class="icon-asterisk">{{ session()->get('message') }}</p>
+                </div>
+            @endif
+
             <div class="nav">
                 <ul class="nav_tabs">
                     <li class="nav_tabs_item">
@@ -47,9 +53,10 @@
                     </li>
                 </ul>
 
-                <form action="{{ route('admin.calleds.store') }}" method="post" class="app_form"
+                <form action="{{ route('admin.calleds.update', ['called' => $called->id]) }}" method="post" class="app_form"
                       enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="nav_tabs_content">
                         <div id="data">
@@ -60,8 +67,9 @@
                                         <option value="" selected>Selecione o cliente</option>
                                         @foreach($clients as $client)
                                             <option
-                                                value="{{ $client->id }}">{{ $client->social_name }}
-                                                ({{ $client->alias_name }})
+                                                value="{{ $client->id }}"
+                                                {{ (old('client_id') == $client->id ? 'selected' : ($called->client_id == $client->id ? 'selected' : '')) }}>
+                                                {{ $client->social_name }}({{ $client->alias_name }})
                                             </option>
                                         @endforeach
                                     </select>
@@ -73,8 +81,9 @@
                                         <option value="" selected>Selecione o usuario</option>
                                         @foreach($users as $user)
                                             <option
-                                                value="{{ $user->id }}">{{ $user->name }}
-                                                ({{ $user->email }})
+                                                value="{{ old('user_id') ?? $user->id }}"
+                                                {{ (old('user_id') == $user->id ? 'selected' : ($called->user_id == $user->id ? 'selected' : '')) }}>
+                                                {{ $user->name }}({{ $user->email }})
                                             </option>
                                         @endforeach
                                     </select>
@@ -87,7 +96,9 @@
                                         <option value="" selected>Selecione a categoria</option>
                                         @foreach($categories as $category)
                                             <option
-                                                value="{{ $category->id }}">{{ $category->description }}
+                                                value="{{ old('category') ?? $category->id }}"
+                                                {{ (old('category') == $category->id ? 'selected' : ($called->category == $category->id ? 'selected' : '')) }}>
+                                                {{ $category->description }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -99,7 +110,9 @@
                                         <option value="" selected>Selecione o modulo</option>
                                         @foreach($modules as $module)
                                             <option
-                                                value="{{ $module->id }}">{{ $module->description }}
+                                                value="{{ $module->id }}"
+                                                {{ (old('module') == $module->id ? 'selected' : ($called->module == $module->id ? 'selected' : '')) }}>
+                                                {{ $module->description }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -108,7 +121,7 @@
 
                             <label class="label">
                                 <span class="legend">*Assunto:</span>
-                                <input type="text" name="subject" placeholder="Assunto" value="{{ old('subject') }}"/>
+                                <input type="text" name="subject" placeholder="Assunto" value="{{ old('subject') ?? $called->subject }}"/>
                             </label>
 
 
@@ -122,7 +135,7 @@
                                     <label class="label">
                                         <span class="legend">Descrição do Chamado:</span>
                                         <textarea name="description" cols="30" rows="10"
-                                                  class="mce">{{ old('description') }}</textarea>
+                                                  class="mce">{{ old('description') ?? $called->description }}</textarea>
                                     </label>
                                 </div>
                             </div>
@@ -143,20 +156,10 @@
                     </div>
 
                     <div class="text-right mt-2">
-                        <button class="btn btn-large btn-green icon-check-square-o">Abrir Chamado</button>
+                        <button class="btn btn-large btn-green icon-check-square-o">Salvar Chamado</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-@endsection
-@section('js')
-    <script>
-        $('select[name="user_id"]').change(function () {
-            var user_id = $(this);
-            $.post(user_id.data('action'), {user_id: user_id.val()}, function (response) {
-                setFieldProperty(response);
-            }, 'json');
-        });
-    </script>
 @endsection

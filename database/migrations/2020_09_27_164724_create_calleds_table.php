@@ -20,7 +20,7 @@ class CreateCalledsTable extends Migration
             $table->foreignId('category')->constrained('categories');
             $table->foreignId('module')->constrained('modules');
             $table->string('subject');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->string('files')->nullable();
             $table->timestamps();
         });

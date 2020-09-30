@@ -4,20 +4,18 @@
     <section class="dash_content_app">
 
         <header class="dash_content_app_header">
-            <h2 class="icon-search">Filtro</h2>
+            <h2 class="icon-search">Chamados</h2>
 
             <div class="dash_content_app_header_actions">
                 <nav class="dash_content_app_breadcrumb">
                     <ul>
-                        <li><a href="">Dashboard</a></li>
+                        <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="">Chamados</a></li>
-                        <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="" class="text-blue">Filtro</a></li>
+                        <li><a href="{{ route('admin.calleds.index') }}" class="text-blue">Chamados</a></li>
                     </ul>
                 </nav>
 
-                <a href="dashboard.php?app=called/create" class="btn btn-blue icon-phone ml-1">Criar Chamado</a>
+                <a href="{{ route('admin.calleds.create') }}" class="btn btn-blue icon-phone ml-1">Criar Chamado</a>
                 <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
             </div>
         </header>
@@ -38,14 +36,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a href="" class="text-blue">123456</a></td>
-                        <td><a href="" class="text-blue"><?= date('H/m/Y'); ?></a></td>
-                        <td><a href="" class="text-blue">Seta Soluções</a></td>
-                        <td><a href="" class="text-blue">Em Atendimento</a></td>
-                        <td>Duvida</td>
-                        <td>Financeiro</td>
-                    </tr>
+                    @foreach($calleds as $called)
+                        <tr>
+                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->id }}</a></td>
+                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->created_at }}</a></td>
+                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->clientObject->social_name }}</a></td>
+                            <td>Atendimento</td>
+                            <td>{{ $called->categoryObject->description }}</td>
+                            <td>{{ $called->moduleObject->description }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

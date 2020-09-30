@@ -65,6 +65,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
+    public function calleds()
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
+    }
 
     public function getUrlCoverAttribute()
     {
