@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    public function called()
+    public function issues()
     {
-        return $this->hasMany(Called::class, 'module', 'id');
+        return $this->hasMany(Issue::class, 'module', 'id');
     }
 }

@@ -19,7 +19,9 @@ class User extends FormRequest
 
     public function all($keys = null)
     {
+
         return $this->validateFields(parent::all());
+
     }
 
     public function validateFields(array $inputs)
@@ -55,7 +57,7 @@ class User extends FormRequest
 
             // Access
             'email' => (!empty($this->request->all()['id']) ? 'required|email|unique:users,email,' . $this->request->all()['id'] : 'required|email|unique:users,email'),
-            'password' => (!empty($this->request->all()['id']) ? 'required' : ''),
+            'password' => (empty($this->request->all()['id']) ? 'required' : ''),
 
         ];
     }

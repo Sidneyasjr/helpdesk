@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Client;
+use App\Costumer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User as UserRequest;
 use App\Support\Cropper;
@@ -47,9 +47,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $clients = Client::orderBy('social_name')->get();
+        $costumers = Costumer::orderBy('social_name')->get();
         return view('admin.users.create',[
-            'clients' => $clients
+            'costumers' => $costumers
         ]);
     }
 
@@ -63,13 +63,15 @@ class UserController extends Controller
     {
         $userCreate = User::create($request->all());
 
+
+
         if(!empty($request->file('cover'))){
             $userCreate->cover = $request->file('cover')->store('user');
             $userCreate->save();
         }
 
         return redirect()->route('admin.users.edit', [
-            'users' => $userCreate->id
+            'user' => $userCreate->id
         ])->with(['color' => 'green', 'message' => 'Cliente cadastrado com sucesso!']);
     }
 
@@ -93,9 +95,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        $clients = Client::orderBy('alias_name')->get();
+        $costumers = Costumer::orderBy('alias_name')->get();
         return view('admin.users.edit', [
-            'clients' => $clients,
+            'costumers' => $costumers,
             'user' => $user,
 
         ]);
@@ -112,10 +114,8 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        $user->setUserAttribute($request->user);
-        $user->setMasterAttribute($request->Master);
+        $user->setMasterAttribute($request->master);
         $user->setAdminAttribute($request->admin);
-        $user->setClientAttribute($request->client);
 
         if(!empty($request->file('cover'))){
             Storage::delete($user->cover);

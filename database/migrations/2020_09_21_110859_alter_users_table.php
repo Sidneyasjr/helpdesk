@@ -14,10 +14,6 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            /** perfil */
-            $table->boolean('user')->nullable();
-            $table->boolean('master')->nullable();
-
             /** data */
             $table->string('genre')->nullable();
             $table->string('document')->unique();
@@ -38,8 +34,8 @@ class AlterUsersTable extends Migration
             $table->string('cell')->nullable();
 
             /** access */
+            $table->boolean('master')->nullable();
             $table->boolean('admin')->nullable();
-            $table->boolean('client')->nullable();
         });
     }
 
@@ -51,10 +47,6 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            /** perfil */
-            $table->dropColumn('user');
-            $table->dropColumn('master');
-
             /** data */
             $table->dropColumn('genre');
             $table->dropColumn('document');
@@ -75,8 +67,8 @@ class AlterUsersTable extends Migration
             $table->dropColumn('cell');
 
             /** access */
+            $table->dropColumn('master');
             $table->dropColumn('admin');
-            $table->dropColumn('client');
         });
     }
 }

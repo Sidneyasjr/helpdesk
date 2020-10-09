@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Issue;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,14 +13,17 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         if (Auth::check() === true){
-            return redirect()->route('admin.login');
+            return redirect()->route('admin.home');
         }
         return view('admin.index');
     }
 
     public function home()
     {
-        return view('admin.dashboard');
+        $issues = Issue::all();
+        return view('admin.dashboard', [
+            'issues' => $issues
+        ]);
     }
 
     public function login(Request $request)

@@ -42,7 +42,7 @@
     position: relative;
 
     a {
-      color: #999;
+      color: #A0CCDE;
       background: $color-primary;
       font-size: $font-size-small;
       display: block;
@@ -50,19 +50,19 @@
       padding: 15px 30px;
 
       &:hover {
-        background: #59606b;
+        background: #B4C62D;
         color: #ffffff;
         border-left: 3px solid $color-blue;
       }
     }
 
     &.active > a {
-      border-left: 3px solid $color-blue;
+      border-left: 3px solid $color-green-v;
       color: #FFF;
     }
 
     &.active a {
-      border-left: 3px solid $color-blue;
+      border-left: 3px solid $color-green-v;
     }
 
     &.active a + .dash_sidebar_nav_submenu {
@@ -73,30 +73,30 @@
 
         a {
           border-left: 3px solid $color-blue !important;
-          background: #59606b !important;
+          background: #B4C62D !important;
           color: #FFF;
         }
       }
     }
 
     .dash_sidebar_nav_submenu {
-      border-left: 3px solid $color-blue;
+      border-left: 3px solid $color-green-v;
       display: none;
 
       a {
         background-color: $dash-sidebar-background !important;
 
         &:hover {
-          background: #59606b;
+          background: #B4C62D;
           color: #ffffff;
-          border-left: 6px solid $color-blue;
+          border-left: 6px solid $color-green-v;
         }
       }
     }
 
     &:not(.active):hover .dash_sidebar_nav_submenu {
       display: block;
-      background: #273B4A;
+      background: #B4C62D;
       position: absolute;
       width: 240px;
       top: 0;

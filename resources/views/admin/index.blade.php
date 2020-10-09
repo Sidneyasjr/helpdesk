@@ -22,14 +22,14 @@
     <div class="dash_login_left">
         <article class="dash_login_left_box">
             <header class="dash_login_box_headline">
-                <div class="dash_login_box_headline_logo icon-notext"></div>
+                <div class="dash_login_box_headline_logo icon-key icon-notext"></div>
                 <h1>Login</h1>
             </header>
 
             <form name="login" action="{{ route('admin.login.do') }}" method="post" autocomplete="off">
                 <label>
                     <span class="field icon-envelope">E-mail:</span>
-                    <input type="email" name="email" placeholder="Informe seu e-mail" required value="junior.sas@hotmail.com"/>
+                    <input type="email" name="email" placeholder="Informe seu e-mail" required value="admin@admin.com"/>
                 </label>
 
                 <label>
@@ -37,16 +37,16 @@
                     <input type="password" name="password_check" placeholder="Informe sua senha" required/>
                 </label>
 
-                <button class="gradient gradient-blue radius icon-sign-in">Entrar</button>
+                <button class="gradient gradient-green-v radius icon-sign-in">Entrar</button>
             </form>
 
             <footer>
-                <p>Desenvolvido por <a href="https://www.visua.com.br">www.<b>visua</b>.com.br</a></p>
+                <p>Desenvolvido por <a href="https://www.visua.com.br">www.<b>sidneyandrade</b>.com.br</a></p>
                 <p>&copy; <?= date("Y"); ?> - Todos os Direitos Reservados</p>
                 <p class="dash_login_left_box_support">
                     <a target="_blank"
-                       class="icon-whatsapp transition text-green"
-                       href="https://api.whatsapp.com/send?phone=DDI+DDD+TELEFONE&text=Olá, preciso de ajuda com o login."
+                       class="icon-whatsapp transition text-green-v"
+                       href="https://api.whatsapp.com/send?phone=55+47+991158947&text=Olá, preciso de ajuda com o login."
                     >Precisa de Suporte?</a>
                 </p>
             </footer>
@@ -58,7 +58,6 @@
 </div>
 
 <script src="{{ url(mix('backend/assets/js/jquery.js')) }}"></script>
-<script src="{{ url(mix('backend/assets/js/libs.js')) }}"></script>
 <script src="{{ url(mix('backend/assets/js/login.js')) }}"></script>
 
 </body>

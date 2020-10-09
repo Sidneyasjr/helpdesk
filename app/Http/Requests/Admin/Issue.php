@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class Called extends FormRequest
+class Issue extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,11 @@ class Called extends FormRequest
     public function rules()
     {
         return [
-            'client_id' => 'required',
+            'costumer' => 'required',
             'category' => 'required',
             'module' => 'required',
-            'subject' => 'required'
+            'subject' => 'required',
+            'description' => 'required'
         ];
     }
 }

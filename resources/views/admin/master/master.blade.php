@@ -18,7 +18,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Visua - Sistema Gerencial</title>
+    <title>HelpDesk - Sistema Gerencial</title>
 </head>
 <body>
 
@@ -45,16 +45,16 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.calleds') }}"><a class="icon-phone" href="{{ route('admin.calleds.index') }}">Chamados</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.issues') }}"><a class="icon-phone" href="{{ route('admin.issues.index') }}">Chamados</a>
                 <ul class="dash_sidebar_nav_submenu">
-                    <li class="{{ isActive('admin.calleds.index') }}"><a href="{{ route('admin.calleds.index') }}">Ver Todos</a></li>
-                    <li class="{{ isActive('admin.calleds.create') }}"><a href="{{ route('admin.calleds.create') }}">Criar Novo</a></li>
+                    <li class="{{ isActive('admin.issues.index') }}"><a href="{{ route('admin.issues.index') }}">Ver Todos</a></li>
+                    <li class="{{ isActive('admin.issues.create') }}"><a href="{{ route('admin.issues.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.clients') }}"><a class="icon-users" href="{{ route('admin.clients.index') }}">Clientes</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.costumers') }}"><a class="icon-university" href="{{ route('admin.costumers.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
-                    <li class="{{ isActive('admin.clients.index') }}"><a href="{{ route('admin.clients.index') }}">Ver Todos</a></li>
-                    <li class="{{ isActive('admin.clients.create') }}"><a href="{{ route('admin.clients.create') }}">Criar Novo</a></li>
+                    <li class="{{ isActive('admin.costumers.index') }}"><a href="{{ route('admin.costumers.index') }}">Ver Todos</a></li>
+                    <li class="{{ isActive('admin.costumers.create') }}"><a href="{{ route('admin.costumers.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
             <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}"><a class="icon-users" href="{{ route('admin.users.index') }}">Usuarios</a>
@@ -76,7 +76,7 @@
                 <div class="dash_userbar_box_content">
                     <span class="icon-align-justify icon-notext mobile_menu transition btn btn-green"></span>
                     <h1 class="transition">
-                        <i class="icon-code text-blue"></i><a href="">Visua<b> Gerencial</b></a>
+                        <i class="icon-phone text-blue"></i><a href="">HelpDesk<b> Gerencial</b></a>
                     </h1>
                     <div class="dash_userbar_box_bar no_mobile">
                         <a class="text-red icon-sign-out" href="{{ route('admin.logout') }}">Sair</a>

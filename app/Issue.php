@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Called extends Model
+class Issue extends Model
 {
     protected $fillable = [
-        'client_id',
-        'user_id',
+        'costumer',
+        'user',
         'category',
         'module',
         'subject',
@@ -16,14 +16,14 @@ class Called extends Model
         'files'
     ];
 
-    public function clientObject()
+    public function costumerObject()
     {
-        return $this->belongsTo(Client::class, 'client_id', 'id');
+        return $this->belongsTo(Costumer::class, 'costumer', 'id');
     }
 
     public function userObject()
     {
-        return $this->belongsTo(User::class, 'client_id', 'id');
+        return $this->belongsTo(User::class, 'user', 'id');
     }
 
     public function categoryObject()

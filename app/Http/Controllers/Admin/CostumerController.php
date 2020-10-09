@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Client;
+use App\Costumer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Client as ClientRequest;
+use App\Http\Requests\Admin\Customer as CostumerRequest;
 
-class ClientController extends Controller
+class CostumerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('admin.clients.index', [
-            'clients' => $clients,
+        $costumers = Costumer::all();
+        return view('admin.costumers.index', [
+            'costumers' => $costumers,
         ]);
     }
 
@@ -29,7 +29,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('admin.clients.create');
+        return view('admin.costumers.create');
     }
 
     /**
@@ -38,12 +38,12 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ClientRequest $request)
+    public function store(CostumerRequest $request)
     {
-        $createClient = Client::create($request->all());
+        $createCostumer = Costumer::create($request->all());
 
-        return redirect()->route('admin.clients.edit', [
-            'client' => $createClient->id,
+        return redirect()->route('admin.costumers.edit', [
+            'customer' => $createCostumer->id,
         ])->with(['color' => 'green', 'message' => 'Empresa cadastrada com sucesso!']);
     }
 
@@ -66,10 +66,10 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::where('id', $id)->first();
+        $costumer = Costumer::where('id', $id)->first();
 
-        return view('admin.clients.edit', [
-            'client' => $client
+        return view('admin.costumers.edit', [
+            'costumer' => $costumer
         ]);
     }
 
@@ -80,19 +80,19 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
-    public function update(ClientRequest $request, $id)
+    public function update(CostumerRequest $request, $id)
     {
-        $client = Client::where('id', $id)->first();
-        $client->fill($request->all());
+        $costumer = Costumer::where('id', $id)->first();
+        $costumer->fill($request->all());
 
-        $client->setStatusAttribute($request->status);
+        $costumer->setStatusAttribute($request->status);
 
-        if(!$client->save()){
+        if(!$costumer->save()){
             return redirect()->back()->withInput()->withErrors();
         }
 
-        return redirect()->route('admin.clients.edit', [
-            'client' => $client->id,
+        return redirect()->route('admin.costumers.edit', [
+            'costumer' => $costumer->id,
         ])->with(['color' => 'green', 'message' => 'Empresa atualizada com sucesso!']);
     }
 

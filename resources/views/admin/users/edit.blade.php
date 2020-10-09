@@ -56,23 +56,10 @@
                       enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="id" value="{{ $user->id }}">
 
                     <div class="nav_tabs_content">
                         <div id="data">
-                            <div class="label_gc">
-                                <span class="legend">Perfil:</span>
-                                <label class="label">
-                                    <input type="checkbox" name="user"
-                                        {{ (old('user') == 'on' || old('user') == true ? 'checked' : ($user->user == true ? 'checked' : '')) }}>
-                                    <span>Usuario</span>
-                                </label>
-
-                                <label class="label">
-                                    <input type="checkbox" name="master"
-                                        {{ (old('master') == 'on' || old('master') == true ? 'checked' : ($user->master == true ? 'checked' : '')) }}>
-                                    <span>Master</span>
-                                </label>
-                            </div>
                             <label class="label">
                                 <span class="legend">*Nome:</span>
                                 <input type="text" name="name" placeholder="Nome Completo"
@@ -240,38 +227,33 @@
                                 <div class="app_collapse_content">
                                     <label class="label">
                                         <span class="legend">Empresa:</span>
-                                        <select name="client_id" class="client_id">
+                                        <select name="costumer" class="select2">
                                             <option value="" selected>Selecione a empresa</option>
-                                            @foreach($clients as $client)
+                                            @foreach($costumers as $costumer)
                                                 <option
-                                                    value="{{ $client->id }}" {{ ($client->id == $user->client_id ? 'selected' : '') }}>{{ $client->social_name }}
-                                                    ({{ $client->alias_name }})
+                                                    value="{{ $costumer->id }}" {{ ($costumer->id == $user->costumer ? 'selected' : '') }}>{{ $costumer->social_name }}
+                                                    ({{ $costumer->alias_name }})
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <p style="margin-top: 4px;">
-                                            <a href="{{ route('admin.clients.edit', ['client' => $user->client_id]) }}"
-                                               class="text-orange icon-link" style="font-size: .8em;"
-                                               target="_blank">Acessar
-                                                Cadastro</a>
-                                        </p>
+
                                     </label>
                                     <div class="companies_list">
-                                        @if($user->client_id)
+                                        @if($user->costumer)
 
-                                            @foreach($user->client()->get() as $client)
+                                            @foreach($user->costumer()->get() as $costumer)
                                                 <div class="companies_list_item mb-2">
-                                                    <p><b>Razão Social:</b> {{ $client->social_name }}</p>
-                                                    <p><b>Nome Fantasia:</b> {{ $client->alias_name }}</p>
-                                                    <p><b>CNPJ:</b> {{ $client->document_company }} -
+                                                    <p><b>Razão Social:</b> {{ $costumer->social_name }}</p>
+                                                    <p><b>Nome Fantasia:</b> {{ $costumer->alias_name }}</p>
+                                                    <p><b>CNPJ:</b> {{ $costumer->document_company }} -
                                                         <b>Inscrição
-                                                            Estadual:</b> {{ $client->document_company_secondary }}
+                                                            Estadual:</b> {{ $costumer->document_company_secondary }}
                                                     </p>
-                                                    <p><b>Endereço:</b> {{ $client->street }}, {{ $user->number }}</p>
-                                                    <p><b>CEP:</b> {{ $client->zipcode }}
-                                                        <b>Bairro:</b> {{ $client->neighborhood }}
+                                                    <p><b>Endereço:</b> {{ $costumer->street }}, {{ $user->number }}</p>
+                                                    <p><b>CEP:</b> {{ $costumer->zipcode }}
+                                                        <b>Bairro:</b> {{ $costumer->neighborhood }}
                                                         <b>Cidade/Estado:</b>
-                                                        {{ $client->city }}/{{ $client->state }}</p>
+                                                        {{ $costumer->city }}/{{ $costumer->state }}</p>
                                                 </div>
                                             @endforeach
                                         @else
@@ -316,25 +298,25 @@
                         </div>
 
                         <div id="management" class="d-none">
-                            <div class="label_gc">
+                            <div class="label_gc gradient-green-v transition">
                                 <span class="legend">Conceder:</span>
                                 <label class="label">
-                                    <input type="checkbox" name="admin"
-                                        {{ (old('admin') == 'on' || old('admin') == true ? 'checked' : ($user->admin == true ? 'checked' : '')) }}>
-                                    <span>Administrativo</span>
+                                    <input type="checkbox" name="master"
+                                        {{ (old('master') == 'on' || old('master') == true ? 'checked' : ($user->admin == true ? 'checked' : '')) }}>
+                                    <span>Master</span>
                                 </label>
 
                                 <label class="label">
-                                    <input type="checkbox" name="client"
-                                        {{ (old('client') == 'on' || old('client') == true ? 'checked' : ($user->client == true ? 'checked' : '')) }}>
-                                    <span>Cliente</span>
+                                    <input type="checkbox" name="admin"
+                                        {{ (old('admin') == 'on' || old('admin') == true ? 'checked' : ($user->client == true ? 'checked' : '')) }}>
+                                    <span>Administrador</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-right mt-2">
-                        <button class="btn btn-large btn-green icon-check-square-o" type="submit">Salvar Alterações
+                        <button class="btn btn-large btn-green-v icon-check-square-o" type="submit">Salvar Alterações
                         </button>
                     </div>
                 </form>

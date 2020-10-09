@@ -11,20 +11,20 @@
                     <ul>
                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('admin.calleds.index') }}" class="text-blue">Chamados</a></li>
+                        <li><a href="{{ route('admin.issues.index') }}" class="text-blue">Chamados</a></li>
                     </ul>
                 </nav>
 
-                <a href="{{ route('admin.calleds.create') }}" class="btn btn-blue icon-phone ml-1">Criar Chamado</a>
+                <a href="{{ route('admin.issues.create') }}" class="btn btn-blue icon-phone ml-1">Criar Chamado</a>
                 <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
             </div>
         </header>
 
-        @include('admin.calleds.filter')
+        @include('admin.issues.filter')
 
         <div class="dash_content_app_box">
             <div class="dash_content_app_box_stage">
-                <table id="dataTable" class="nowrap hover stripe" width="100" style="width: 100% !important;">
+                <table id="dataTable" class="nowrap hover stripe dataTable" width="100" style="width: 100% !important;">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -36,14 +36,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($calleds as $called)
+                    @foreach($issues as $issue)
                         <tr>
-                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->id }}</a></td>
-                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->created_at }}</a></td>
-                            <td><a href="{{ route('admin.calleds.edit', [ 'called' => $called->id]) }}" class="text-blue">{{ $called->clientObject->social_name }}</a></td>
+                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->id }}</a></td>
+                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->created_at }}</a></td>
+                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->costumerObject->social_name }}</a></td>
                             <td>Atendimento</td>
-                            <td>{{ $called->categoryObject->description }}</td>
-                            <td>{{ $called->moduleObject->description }}</td>
+                            <td>{{ $issue->categoryObject->description }}</td>
+                            <td>{{ $issue->moduleObject->description }}</td>
                         </tr>
                     @endforeach
                     </tbody>

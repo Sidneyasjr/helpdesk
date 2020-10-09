@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCalledsTable extends Migration
+class CreateIssuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateCalledsTable extends Migration
      */
     public function up()
     {
-        Schema::create('calleds', function (Blueprint $table) {
+        Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('costumer')->constrained('costumers');
+            $table->foreignId('user')->nullable()->constrained('users');
             $table->foreignId('category')->constrained('categories');
             $table->foreignId('module')->constrained('modules');
+            $table->foreignId('comment')->constrained('comments');
+            $table->foreignId('type')->constrained('types_issues');
             $table->string('subject');
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->string('files')->nullable();
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ class CreateCalledsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calleds');
+        Schema::dropIfExists('issues');
     }
 }

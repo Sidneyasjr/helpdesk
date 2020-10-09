@@ -52,18 +52,6 @@
 
                     <div class="nav_tabs_content">
                         <div id="data">
-                            <div class="label_gc">
-                                <span class="legend">Perfil:</span>
-                                <label class="label">
-                                    <input type="checkbox"
-                                           name="user" {{ (old('user') == 'on' || old('user') == true ? 'checked' : '') }}><span>Usuario</span>
-                                </label>
-
-                                <label class="label">
-                                    <input type="checkbox"
-                                           name="master" {{ (old('master') == 'on' || old('master') == true ? 'checked' : '') }}><span>Master</span>
-                                </label>
-                            </div>
                             <label class="label">
                                 <span class="legend">*Nome:</span>
                                 <input type="text" name="name" placeholder="Nome Completo" value="{{ old('name') }}"/>
@@ -226,11 +214,6 @@
                                             <option value="">Empresa (CNPJ)</option>
                                         </select>
 
-                                        <p style="margin-top: 4px;">
-                                            <a href="{{ route('admin.clients.index') }}" class="text-orange icon-link" style="font-size: .8em;"
-                                               target="_blank">Acessar Cadastro</a>
-                                        </p>
-
                                     </label>
                                     <div class="companies_list">
                                         <div class="no-content mb-2">Não foram encontrados registros!</div>
@@ -283,17 +266,17 @@
 
                         <div id="management" class="d-none">
                             <div class="label_gc">
-                                <span class="legend">Conceder:</span>
+                                <span class="legend">Acesso:</span>
+                                <label class="label">
+                                    <input type="checkbox" name="master"
+                                        {{ (old('master') == 'on' || old('master') == true ? 'checked' : '') }}>
+                                    <span>Master</span>
+                                </label>
+
                                 <label class="label">
                                     <input type="checkbox" name="admin"
                                         {{ (old('admin') == 'on' || old('admin') == true ? 'checked' : '') }}>
                                     <span>Administrativo</span>
-                                </label>
-
-                                <label class="label">
-                                    <input type="checkbox" name="client"
-                                        {{ (old('client') == 'on' || old('client') == true ? 'checked' : '') }}>
-                                    <span>Cliente</span>
                                 </label>
                             </div>
                         </div>

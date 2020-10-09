@@ -12,9 +12,10 @@
                     <ul>
                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
+                        <li><a href="{{ route('admin.costumers.index') }}">Clientes</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{route('admin.clients.edit', ['client' => $client->id])}}" class="text-blue">Editar
+                        <li><a href="{{route('admin.costumers.edit', ['costumer' => $costumer->id])}}"
+                               class="text-blue">Editar
                                 Cliente</a></li>
                     </ul>
                 </nav>
@@ -45,14 +46,14 @@
                         <a href="#complementary" class="nav_tabs_item_link">Dados Complementares</a>
                     </li>
                     <li class="nav_tabs_item">
-                        <a href="#realties" class="nav_tabs_item_link">Chamados</a>
+                        <a href="#issues" class="nav_tabs_item_link">Chamados</a>
                     </li>
                     <li class="nav_tabs_item">
                         <a href="#management" class="nav_tabs_item_link">Administrativo</a>
                     </li>
                 </ul>
 
-                <form class="app_form" action="{{ route('admin.clients.update', ['client' => $client->id]) }}"
+                <form class="app_form" action="{{ route('admin.costumers.update', ['costumer' => $costumer->id]) }}"
                       method="post"
                       enctype="multipart/form-data">
                     @csrf
@@ -62,13 +63,13 @@
                             <label class="label">
                                 <span class="legend">*Razão Social:</span>
                                 <input type="text" name="social_name" placeholder="Razão Social"
-                                       value="{{ old('social_name') ?? $client->social_name }}"/>
+                                       value="{{ old('social_name') ?? $costumer->social_name }}"/>
                             </label>
 
                             <label class="label">
                                 <span class="legend">Nome Fantasia:</span>
                                 <input type="text" name="alias_name" placeholder="Nome Fantasia"
-                                       value="{{ old('alias_name') ?? $client->alias_name }}"/>
+                                       value="{{ old('alias_name') ?? $costumer->alias_name }}"/>
                             </label>
 
                             <div class="label_g2">
@@ -76,14 +77,14 @@
                                     <span class="legend">CNPJ:</span>
                                     <input type="tel" name="document_company" class="mask-cnpj"
                                            placeholder="CNPJ da Empresa"
-                                           value="{{ old('document_company') ?? $client->document_company }}"/>
+                                           value="{{ old('document_company') ?? $costumer->document_company }}"/>
                                 </label>
 
                                 <label class="label">
                                     <span class="legend">Inscrição Estadual:</span>
                                     <input type="text" name="document_company_secondary"
                                            placeholder="Número da Inscrição"
-                                           value="{{ old('document_company_secondary') ?? $client->document_company_secondary }}"/>
+                                           value="{{ old('document_company_secondary') ?? $costumer->document_company_secondary }}"/>
                                 </label>
                             </div>
 
@@ -99,47 +100,47 @@
                                             <span class="legend">*CEP:</span>
                                             <input type="tel" name="zipcode" class="mask-zipcode zip_code_search"
                                                    placeholder="Digite o CEP"
-                                                   value="{{ old('zipcode') ?? $client->zipcode }}"/>
+                                                   value="{{ old('zipcode') ?? $costumer->zipcode }}"/>
                                         </label>
                                     </div>
 
                                     <label class="label">
                                         <span class="legend">*Endereço:</span>
                                         <input type="text" name="street" class="street" placeholder="Endereço Completo"
-                                               value="{{ old('street') ?? $client->street }}"/>
+                                               value="{{ old('street') ?? $costumer->street }}"/>
                                     </label>
 
                                     <div class="label_g2">
                                         <label class="label">
                                             <span class="legend">*Número:</span>
                                             <input type="text" name="number" placeholder="Número do Endereço"
-                                                   value="{{ old('number') ?? $client->number }}"/>
+                                                   value="{{ old('number') ?? $costumer->number }}"/>
                                         </label>
 
                                         <label class="label">
                                             <span class="legend">Complemento:</span>
                                             <input type="text" name="complement" placeholder="Completo (Opcional)"
-                                                   value="{{ old('complement') ?? $client->complement }}"/>
+                                                   value="{{ old('complement') ?? $costumer->complement }}"/>
                                         </label>
                                     </div>
 
                                     <label class="label">
                                         <span class="legend">*Bairro:</span>
                                         <input type="text" name="neighborhood" class="neighborhood" placeholder="Bairro"
-                                               value="{{ old('neighborhood') ?? $client->neighborhood }}"/>
+                                               value="{{ old('neighborhood') ?? $costumer->neighborhood }}"/>
                                     </label>
 
                                     <div class="label_g2">
                                         <label class="label">
                                             <span class="legend">*Estado:</span>
                                             <input type="text" name="state" class="state" placeholder="Estado"
-                                                   value="{{ old('state') ?? $client->state }}"/>
+                                                   value="{{ old('state') ?? $costumer->state }}"/>
                                         </label>
 
                                         <label class="label">
                                             <span class="legend">*Cidade:</span>
                                             <input type="text" name="city" class="city" placeholder="Cidade"
-                                                   value="{{ old('city') ?? $client->city }}"/>
+                                                   value="{{ old('city') ?? $costumer->city }}"/>
                                         </label>
                                     </div>
                                 </div>
@@ -157,14 +158,14 @@
                                             <span class="legend">Telefone:</span>
                                             <input type="tel" name="telephone" class="mask-phone"
                                                    placeholder="Número do Telefone com DDD"
-                                                   value="{{ old('telephone') ?? $client->telephone }}"/>
+                                                   value="{{ old('telephone') ?? $costumer->telephone }}"/>
                                         </label>
 
                                         <label class="label">
                                             <span class="legend">*Celular:</span>
                                             <input type="tel" name="cell" class="mask-cell"
                                                    placeholder="Número do Telefone com DDD"
-                                                   value="{{ old('cell') ?? $client->cell }}"/>
+                                                   value="{{ old('cell') ?? $costumer->cell }}"/>
                                         </label>
                                     </div>
                                 </div>
@@ -175,14 +176,14 @@
                                             <span class="legend">*E-mail Principal:</span>
                                             <input type="email" name="email" class="email"
                                                    placeholder="E-mail Principal"
-                                                   value="{{ old('email') ?? $client->email }}"/>
+                                                   value="{{ old('email') ?? $costumer->email }}"/>
                                         </label>
 
                                         <label class="label">
                                             <span class="legend">*E-mails Secundarios:</span>
                                             <input type="email" name="email_secondary" class="email_secondary"
                                                    placeholder="E-mails Secundarios"
-                                                   value="{{ old('email_secondary') ?? $client->email_secondary }}"/>
+                                                   value="{{ old('email_secondary') ?? $costumer->email_secondary }}"/>
                                         </label>
                                     </div>
                                 </div>
@@ -201,11 +202,12 @@
                                        class="btn btn-green icon-building-o">Cadastrar
                                         Novo Usuario</a>
                                 </p>
-                                @if(count($client->users()->get()))
-                                    <div class="app_collapse_content">
-                                        <div class="dash_content_app_box">
-                                            <div class="dash_content_app_box_stage">
-                                                <table id="dataTable" class="nowrap stripe" width="100"
+
+                                <div class="app_collapse_content">
+                                    <div class="dash_content_app_box">
+                                        <div class="dash_content_app_box_stage">
+                                            @if(count($costumer->users()->get()))
+                                                <table id="dataTable" class="dataTable nowrap stripe" width="100"
                                                        style="width: 100% !important;">
                                                     <thead>
                                                     <tr>
@@ -218,7 +220,7 @@
                                                     </thead>
                                                     <tbody>
 
-                                                    @foreach($client->users()->get() as $user)
+                                                    @foreach($costumer->users()->get() as $user)
                                                         <tr>
                                                             <td>{{ $user->id }}</td>
                                                             <td>
@@ -232,51 +234,58 @@
                                                     @endforeach
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                            @else
+                                                <div class="no-content mb-2">Não foram encontrados registros!</div>
+                                            @endif
                                         </div>
-                                        @else
-                                            <div class="no-content mb-2">Não foram encontrados registros!</div>
-                                        @endif
                                     </div>
+
+                                </div>
                             </div>
                         </div>
 
-                        <div id="realties" class="d-none">
+                        <div id="issues" class="d-none">
                             <div class="app_collapse">
                                 <div class="app_collapse_header collapse">
                                     <h3>Chamados</h3>
                                     <span class="icon-minus-circle icon-notext"></span>
                                 </div>
-
                                 <div class="app_collapse_content">
-                                    <div id="realties">
+                                    <div class="dash_content_app_box">
                                         <div class="dash_content_app_box_stage">
-                                            <table id="dataTable" class="nowrap hover stripe" width="100"
-                                                   style="width: 100% !important;">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Abertura</th>
-                                                    <th>Cliente</th>
-                                                    <th>Satus</th>
-                                                    <th>Categoria</th>
-                                                    <th>Modulo</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td><a href="" class="text-blue">123456</a></td>
-                                                    <td><a href="" class="text-blue"><?= date('H/m/Y'); ?></a></td>
-                                                    <td><a href="" class="text-blue">Seta Soluções</a></td>
-                                                    <td><a href="" class="text-blue">Em atendimento</a></td>
-                                                    <td>Duvida</td>
-                                                    <td>Financeiro</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            @if(count($costumer->issues()->get()))
+                                                <table id="dataTable2" class="dataTable nowrap stripe" width="100"
+                                                       style="width: 100% !important;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Data de Abertura</th>
+                                                        <th>Cliente</th>
+                                                        <th>Status</th>
+                                                        <th>Categoria</th>
+                                                        <th>Modulo</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    @foreach($costumer->issues()->get() as $issue)
+                                                        <tr>
+                                                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->id }}</a></td>
+                                                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->created_at }}</a></td>
+                                                            <td><a href="{{ route('admin.issues.edit', [ 'issue' => $issue->id]) }}" class="text-blue">{{ $issue->costumerObject->social_name }}</a></td>
+                                                            <td>Atendimento</td>
+                                                            <td>{{ $issue->categoryObject->description }}</td>
+                                                            <td>{{ $issue->moduleObject->description }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <div class="no-content mb-2">Não foram encontrados registros!</div>
+                                            @endif
                                         </div>
-                                        <div class="no-content">Não foram encontrados registros!</div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -286,7 +295,7 @@
                                 <span class="legend">Situação:</span>
                                 <label class="label">
                                     <input type="checkbox" name="status"
-                                        {{ (old('status') == 'on' || old('status') == true ? 'checked' : ($client->status == true ? 'checked' : '')) }}>
+                                        {{ (old('status') == 'on' || old('status') == true ? 'checked' : ($costumer->status == true ? 'checked' : '')) }}>
                                     <span>Ativo</span>
                                 </label>
                             </div>

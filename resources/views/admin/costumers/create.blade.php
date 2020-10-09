@@ -12,9 +12,9 @@
                 <ul>
                     <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                     <li class="separator icon-angle-right icon-notext"></li>
-                    <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
+                    <li><a href="{{ route('admin.costumers.index') }}">Clientes</a></li>
                     <li class="separator icon-angle-right icon-notext"></li>
-                    <li><a href="{{ route('admin.clients.create') }}" class="text-blue">Novo Cliente</a></li>
+                    <li><a href="{{ route('admin.costumers.create') }}" class="text-blue">Novo Cliente</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,7 +45,7 @@
                 </li>
             </ul>
 
-            <form class="app_form" action="{{ route('admin.clients.store') }}" method="post" enctype="multipart/form-data">
+            <form class="app_form" action="{{ route('admin.costumers.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="nav_tabs_content">
@@ -178,7 +178,7 @@
                             <div class="app_collapse_content">
 
                                 <p class="text-right">
-                                    <a href="{{ route('admin.users.create') }}" class="btn btn-green icon-building-o">Cadastrar
+                                    <a href="{{ route('admin.users.create') }}" class="btn btn-green-v icon-building-o">Cadastrar
                                         Novo Usuario</a>
                                 </p>
                             </div>
@@ -238,7 +238,7 @@
                 </div>
 
                 <div class="text-right mt-2">
-                    <button class="btn btn-large btn-green icon-check-square-o" type="submit">Salvar Alterações
+                    <button class="btn btn-large btn-green-v icon-check-square-o" type="submit">Salvar Alterações
                     </button>
                 </div>
             </form>

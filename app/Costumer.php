@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Costumer extends Model
 {
     protected $fillable = [
         'social_name',
@@ -28,12 +28,12 @@ class Client extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'client_id', 'id');
+        return $this->hasMany(User::class, 'costumer', 'id');
     }
 
-    public function calleds()
+    public function issues()
     {
-        return $this->hasMany(User::class, 'client_id', 'id');
+        return $this->hasMany(Issue::class, 'costumer', 'id');
     }
 
 

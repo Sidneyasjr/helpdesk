@@ -1,8 +1,8 @@
 $font-family: 'Open Sans';
 
 /** COLOR's DEFAULT **/
-$color-primary: #1a1f26;
-$color-secondary: #282f3a;
+$color-primary: #004567;
+$color-secondary: #376998;
 
 /** LOGIN - LEFT */
 $dash-login-left-width: 40%;
@@ -59,7 +59,8 @@ $color-gray-dark: #333333;
 $color-black: #000000;
 
 $color-green: #36BA9B;
-$color-blue: #39AED9;
+$color-green-v: #B4C62D;
+$color-blue: #376998;
 $color-yellow: #F5B946;
 $color-red: #D94352;
 $color-orange: #F4645F;
@@ -75,6 +76,7 @@ $theme-colors: () !default;
 $theme-colors: map_merge(
   (
     "green": $color-green,
+    "green-v": $color-green-v,
     "blue": $color-blue,
     "yellow": $color-yellow,
     "red": $color-red,

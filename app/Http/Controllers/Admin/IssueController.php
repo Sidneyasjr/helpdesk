@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Called;
+use App\Issue;
 use App\Category;
-use App\Client;
+use App\Costumer;
 use App\Http\Controllers\Controller;
 use App\Module;
 use App\User;
-use App\Http\Requests\Admin\Called as CalledRequest;
+use App\Http\Requests\Admin\Issue as IssueRequest;
 use Illuminate\Http\Request;
 
-class CalledController extends Controller
+class IssueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class CalledController extends Controller
      */
     public function index()
     {
-        $calleds = Called::all();
-        return view('admin.calleds.index' ,[
-            'calleds' => $calleds
+        $issues = Issue::all();
+        return view('admin.issues.index' ,[
+            'issues' => $issues
         ]);
     }
 
@@ -33,14 +33,14 @@ class CalledController extends Controller
      */
     public function create()
     {
-        $clients = Client::orderBy('social_name')->get();
+        $costumers = Costumer::orderBy('social_name')->get();
         $users = User::orderBy('name')->get();
         $categories = Category::orderBy('id')->get();
         $modules = Module::orderBy('id')->get();
 
 
-        return view('admin.calleds.create', [
-            'clients' => $clients,
+        return view('admin.issues.create', [
+            'costumers' => $costumers,
             'users' => $users,
             'categories' => $categories,
             'modules' => $modules
@@ -53,11 +53,11 @@ class CalledController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CalledRequest $request)
+    public function store(IssueRequest $request)
     {
-        $calledCreate = Called::create($request->all());
-        return redirect()->route('admin.calleds.edit',[
-            'called' => $calledCreate->id
+        $issueCreate = Issue::create($request->all());
+        return redirect()->route('admin.issues.edit',[
+            'issue' => $issueCreate->id
         ])->with(['color' => 'green', 'message' => 'Chamado criado com sucesso!']);
 
     }
@@ -81,15 +81,15 @@ class CalledController extends Controller
      */
     public function edit($id)
     {
-        $called = Called::where('id', $id)->first();
-        $clients = Client::orderBy('social_name')->get();
+        $issue = Issue::where('id', $id)->first();
+        $costumers = Costumer::orderBy('social_name')->get();
         $users = User::orderBy('name')->get();
         $categories = Category::orderBy('id')->get();
         $modules = Module::orderBy('id')->get();
 
-        return view('admin.calleds.edit', [
-            'called' =>$called,
-            'clients' => $clients,
+        return view('admin.issues.edit', [
+            'issue' =>$issue,
+            'costumers' => $costumers,
             'users' => $users,
             'categories' => $categories,
             'modules' => $modules
@@ -103,18 +103,18 @@ class CalledController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CalledRequest $request, $id)
+    public function update(IssueRequest $request, $id)
     {
-        $called = Called::where('id', $id)->first();
+        $issue = Issue::where('id', $id)->first();
 
-        $called->fill($request->all());
+        $issue->fill($request->all());
 
-        if(!$called->save()){
+        if(!$issue->save()){
             return redirect()->back()->withInput()->withErrors();
         }
 
-        return redirect()->route('admin.calleds.edit', [
-            'called' => $called->id
+        return redirect()->route('admin.issues.edit', [
+            'issue' => $issue->id
         ])->with(['color' => 'green', 'message' => 'Chamado atualizado com sucesso!']);
 
 

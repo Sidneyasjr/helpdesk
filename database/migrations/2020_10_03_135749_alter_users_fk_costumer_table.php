@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFkClientsUsersTables extends Migration
+class AlterUsersFkCostumerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFkClientsUsersTables extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('client_id')->nullable()->constrained('clients');
+        Schema::table('Users', function (Blueprint $table) {
+            $table->foreignId('costumer')->nullable()->constrained('costumers');
         });
     }
 
@@ -25,8 +25,8 @@ class AddFkClientsUsersTables extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_clients_id_foreign');
+        Schema::table('Users', function (Blueprint $table) {
+            $table->dropForeign('users_costumer_foreign');
         });
     }
 }

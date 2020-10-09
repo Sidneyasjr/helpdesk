@@ -99,7 +99,7 @@ $(function () {
     });
 
     // DATATABLES
-    $('#dataTable').DataTable({
+    $('.dataTable').DataTable({
         responsive: true,
         "pageLength": 25,
         "language": {

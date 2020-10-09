@@ -12,20 +12,20 @@
                     <ul>
                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('admin.clients.index') }}" class="text-blue">Clientes</a></li>
+                        <li><a href="{{ route('admin.costumers.index') }}" class="text-blue">Clientes</a></li>
                     </ul>
                 </nav>
 
-                <a href="{{ route('admin.clients.create') }}" class="btn btn-blue icon-user ml-1">Criar Cliente</a>
+                <a href="{{ route('admin.costumers.create') }}" class="btn btn-blue icon-user ml-1">Criar Cliente</a>
                 <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
             </div>
         </header>
 
-        @include('admin.clients.filter')
+        @include('admin.costumers.filter')
 
         <div class="dash_content_app_box">
             <div class="dash_content_app_box_stage">
-                <table id="dataTable" class="nowrap stripe" width="100" style="width: 100% !important;">
+                <table id="dataTable" class="nowrap stripe dataTable" width="100" style="width: 100% !important;">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -36,13 +36,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($clients as $client)
+                    @foreach($costumers as $costumer)
                         <tr>
-                            <td><a href="{{route('admin.clients.edit', [$client->id])}}" class="text-blue">{{ $client->id }}</a></td>
-                            <td><a href="{{route('admin.clients.edit', [$client->id])}}" class="text-blue">{{ $client->alias_name }}</a></td>
-                            <td>{{ $client->document_company }}</td>
-                            <td><a href="mailto: {{ $client->email }}" class="text-blue">{{ $client->email }}</a></td>
-                            <td>{{ ($client->status) == true ? 'Ativo' : 'Inativo' }}</td>
+                            <td><a href="{{route('admin.costumers.edit', [$costumer->id])}}" class="text-blue">{{ $costumer->id }}</a></td>
+                            <td><a href="{{route('admin.costumers.edit', [$costumer->id])}}" class="text-blue">{{ $costumer->alias_name }}</a></td>
+                            <td>{{ $costumer->document_company }}</td>
+                            <td><a href="mailto: {{ $costumer->email }}" class="text-blue">{{ $costumer->email }}</a></td>
+                            <td>{{ ($costumer->status) == true ? 'Ativo' : 'Inativo' }}</td>
                         </tr>
                     @endforeach
                     </tbody>

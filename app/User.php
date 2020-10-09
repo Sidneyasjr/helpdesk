@@ -35,11 +35,9 @@ class User extends Authenticatable
         'city',
         'telephone',
         'cell',
-        'user',
         'master',
         'admin',
-        'client',
-        'client_id'
+        'costumer'
     ];
 
     /**
@@ -61,13 +59,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function client()
+    public function costumer()
     {
-        return $this->belongsTo(Client::class, 'client_id', 'id');
+        return $this->belongsTo(Costumer::class, 'costumer', 'id');
     }
-    public function calleds()
+    public function issues()
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->hasMany(User::class, 'user', 'id');
     }
 
     public function getUrlCoverAttribute()
@@ -79,15 +77,6 @@ class User extends Authenticatable
         return '';
     }
 
-    public function setUserAttribute($value)
-    {
-        $this->attributes['user'] = ($value === true || $value === 'on' ? 1 : 0);
-    }
-
-    public function setMasterAttribute($value)
-    {
-        $this->attributes['master'] = ($value === true || $value === 'on' ? 1 : 0);
-    }
 
     public function setDocumentAttribute($value)
     {
@@ -155,14 +144,14 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function setMasterAttribute($value)
+    {
+        $this->attributes['master'] = ($value === true || $value === 'on' ? 1 : 0);
+    }
+
     public function setAdminAttribute($value)
     {
         $this->attributes['admin'] = ($value === true || $value === 'on' ? 1 : 0);
-    }
-
-    public function setClientAttribute($value)
-    {
-        $this->attributes['client'] = ($value === true || $value === 'on' ? 1 : 0);
     }
 
     private function convertStringToDouble(?string $param)
